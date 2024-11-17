@@ -1,5 +1,5 @@
-import { Schema, mongoose } from 'mongoose';
-const contactSchema = new Schema(
+import { mongoose } from 'mongoose';
+const contactSchema = new mongoose.Schema(
   {
     name: {
       type: String,

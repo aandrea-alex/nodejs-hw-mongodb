@@ -4,7 +4,7 @@ import pino from 'pino-http';
 import express from 'express';
 import { initMongoConnection } from './db/initMongoConnection.js';
 
-// import { Student } from './models/student.js';
+import Contact from './models/contact.js';
 
 const app = express();
 
@@ -19,23 +19,23 @@ app.use(
 app.use(cors());
 app.use(express.json());
 
-// app.get('/students', async (req, res) => {
-//   const students = await Student.find();
+app.get('/contacts', async (req, res) => {
+  const contacts = await Contact.find();
 
-//   res.send({ status: 200, data: students });
-// });
+  res.send({ status: 200, data: contacts });
+});
 
-// app.get('/students/:id', async (req, res) => {
-//   const { id } = req.params;
+app.get('/contacts/:id', async (req, res) => {
+  const { id } = req.params;
 
-//   const student = await Student.findById(id);
+  const contact = await Contact.findById(id);
 
-//   if (student === null) {
-//     return res.status(404).send({ status: 404, message: 'Student not found' });
-//   }
+  if (contact === null) {
+    return res.status(404).send({ status: 404, message: 'Contact not found' });
+  }
 
-//   res.send({ status: 200, data: student });
-// });
+  res.send({ status: 200, data: contact });
+});
 
 app.use((req, res, next) => {
   res.status(404).send({ status: 404, message: 'Not found' });
