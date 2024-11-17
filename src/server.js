@@ -3,39 +3,23 @@ import cors from 'cors';
 import pino from 'pino-http';
 import express from 'express';
 import { initMongoConnection } from './db/initMongoConnection.js';
-
-import Contact from './models/contact.js';
+import { getContacts, getContactById } from './services/contacts.js';
 
 const app = express();
 
 app.use(
-    pino({
-      transport: {
-        target: 'pino-pretty',
-      },
-    }),
-  );
+  pino({
+    transport: {
+      target: 'pino-pretty',
+    },
+  }),
+);
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/contacts', async (req, res) => {
-  const contacts = await Contact.find();
-
-  res.send({ status: 200, data: contacts });
-});
-
-app.get('/contacts/:id', async (req, res) => {
-  const { id } = req.params;
-
-  const contact = await Contact.findById(id);
-
-  if (contact === null) {
-    return res.status(404).send({ status: 404, message: 'Contact not found' });
-  }
-
-  res.send({ status: 200, data: contact });
-});
+app.get('/contacts', getContacts);
+app.get('/contacts/:id', getContactById);
 
 app.use((req, res, next) => {
   res.status(404).send({ status: 404, message: 'Not found' });
