@@ -2,8 +2,8 @@ import 'dotenv/config';
 import cors from 'cors';
 import pino from 'pino-http';
 import express from 'express';
+import { initMongoConnection } from './db/initMongoConnection.js';
 
-// import { initDBConnection } from './db.js';
 // import { Student } from './models/student.js';
 
 const app = express();
@@ -48,7 +48,7 @@ app.use((error, req, res, next) => {
 
 async function setupServer() {
   try {
-    // await initDBConnection();
+    await initMongoConnection();
     const PORT = process.env.PORT || 3000;
 
     app.listen(PORT, () => {
