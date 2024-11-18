@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "src/server.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint src/**/*.js",
-    "start": "node ./src/server.js",
-    "dev": "nodemon src/server.js"
+    "start": "node ./src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "keywords": [],
   "author": "Andrey Alexandrov <andrea.alexandrov.67@dmail.com>",
