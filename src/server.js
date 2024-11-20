@@ -1,11 +1,11 @@
 import 'dotenv/config';
+import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
-import express from 'express';
 import { env } from './utils/env.js';
 import contactsRouter from './routers/contacts.js';
-import { errorHandler } from './utils/errorHandler.js';
-import { notFoundHandler } from './utils/notFoundHandler.js';
+import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 const PORT = Number(env('PORT', '3000'));
 

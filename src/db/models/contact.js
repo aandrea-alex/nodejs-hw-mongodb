@@ -6,9 +6,9 @@ const contactSchema = new mongoose.Schema(
       required: [true, 'Set name for contact'],
     },
     phoneNumber: {
-        type: String,
-        required: [true, 'Set phone number'],
-      },
+      type: String,
+      required: [true, 'Set phone number'],
+    },
     email: {
       type: String,
     },
@@ -17,13 +17,13 @@ const contactSchema = new mongoose.Schema(
       default: false,
     },
     contactType: {
-        type: String,
-        enum: ['work', 'home', 'personal'],
-        required: [true, 'Set contact type'],
-        default: 'personal'
-    }
+      type: String,
+      enum: ['work', 'home', 'personal'],
+      required: [true, 'Set contact type'],
+      default: 'personal',
+    },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
-export default mongoose.model('Contact', contactSchema);
+export const ContactsCollection = mongoose.model('Contact', contactSchema);
