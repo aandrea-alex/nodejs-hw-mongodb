@@ -7,7 +7,7 @@ import {
   updateContact,
 } from '../services/contacts.js';
 
-export const getContactsCtrl = async (req, res, next) => {
+export const getContactsCtrl = async (_req, res) => {
   const contacts = await getAllContacts();
   res.send({
     status: 200,
@@ -16,7 +16,7 @@ export const getContactsCtrl = async (req, res, next) => {
   });
 };
 
-export const getContactByIdCtrl = async (req, res, next) => {
+export const getContactByIdCtrl = async (req, res) => {
   const { id } = req.params;
 
   const contact = await getContactById(id);
@@ -41,7 +41,7 @@ export const createContactCtrl = async (req, res) => {
   });
 };
 
-export const deleteContactCtrl = async (req, res, next) => {
+export const deleteContactCtrl = async (req, res) => {
   const { id } = req.params;
 
   const contact = await deleteContact(id);
@@ -52,7 +52,7 @@ export const deleteContactCtrl = async (req, res, next) => {
   res.status(204).send();
 };
 
-export const upsertContactCtrl = async (req, res, next) => {
+export const upsertContactCtrl = async (req, res) => {
   const { id } = req.params;
 
   const result = await updateContact(id, req.body, {
@@ -72,7 +72,7 @@ export const upsertContactCtrl = async (req, res, next) => {
   });
 };
 
-export const patchContactCtrl = async (req, res, next) => {
+export const patchContactCtrl = async (req, res) => {
   const { id } = req.params;
   const result = await updateContact(id, req.body);
 
