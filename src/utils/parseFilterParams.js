@@ -1,3 +1,4 @@
+import { CONTACT_TYPE } from "../constants/index.js";
 function parseBoolean(value) {
   if (typeof value === 'string') {
     const lowerValue = value.toLowerCase();
@@ -14,7 +15,7 @@ function parseBoolean(value) {
   const parseContactType = (type) => {
     const isString = typeof type === 'string';
     if (!isString) return;
-    const isValidType = (type) => ['work', 'home', 'personal'].includes(type);
+    const isValidType = (type) => Object.values(CONTACT_TYPE).includes(type);
   
     if (isValidType(type)) return type;
   };
