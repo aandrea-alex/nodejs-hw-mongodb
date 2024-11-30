@@ -1,3 +1,5 @@
+import { DEFAULT_FIRSTPAGE, DEFAULT_PERPAGE } from "../constants/index.js";
+
 const parseNumber = (number, defaultValue) => {
     const isString = typeof number === 'string';
     if (!isString) return defaultValue;
@@ -13,8 +15,8 @@ const parseNumber = (number, defaultValue) => {
   export const parsePaginationParams = (query) => {
     const { page, perPage } = query;
   
-    const parsedPage = parseNumber(page, 1);
-    const parsedPerPage = parseNumber(perPage, 4);
+    const parsedPage = parseNumber(page, DEFAULT_FIRSTPAGE);
+    const parsedPerPage = parseNumber(perPage, DEFAULT_PERPAGE);
   
     return {
       page: parsedPage,

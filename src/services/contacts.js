@@ -1,15 +1,15 @@
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 import { SORT_ORDER } from '../constants/index.js';
+import { DEFAULT_FIRSTPAGE, DEFAULT_PERPAGE } from '../constants/index.js';
 
 export const getAllContacts = async ({
-  page = 1,
-  perPage = 4,
+  page = DEFAULT_FIRSTPAGE,
+  perPage = DEFAULT_PERPAGE,
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
   filter = {},
 }) => {
-  console.log('FILTER getAllContacts = ', filter);
   const limit = perPage;
   const skip = (page - 1) * perPage;
   const contactsQuery = ContactsCollection.find();
@@ -19,7 +19,7 @@ export const getAllContacts = async ({
   }
 
   if (filter.contactType) {
-    contactsQuery.where('contactType').equals(filter.contactType );
+    contactsQuery.where('contactType').equals(filter.contactType);
   }
 
   const contactsCount = await ContactsCollection.find()

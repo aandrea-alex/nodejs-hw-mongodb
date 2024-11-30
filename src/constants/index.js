@@ -4,7 +4,10 @@ export const SORT_ORDER = {
 };
 
 export const CONTACT_TYPE = {
-    WORK: 'work',
-    HOME: 'home',
-    PERSONAL: 'personal',
-  };
+  WORK: 'work',
+  HOME: 'home',
+  PERSONAL: 'personal',
+};
+
+export const DEFAULT_PERPAGE = 4;
+export const DEFAULT_FIRSTPAGE = 1;
