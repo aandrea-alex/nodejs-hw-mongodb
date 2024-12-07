@@ -44,7 +44,9 @@ export const getContactByIdCtrl = async (req, res) => {
 };
 
 export const createContactCtrl = async (req, res) => {
-  const contact = await createContact(req.body);
+  const userId = req.user._id;
+  const payload = { ...req.body, userId };
+  const contact = await createContact(payload);
 
   res.status(201).json({
     status: 201,

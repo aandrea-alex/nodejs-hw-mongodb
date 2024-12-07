@@ -10,8 +10,10 @@ import {
   patchContactCtrl,
 } from '../controllers/contacts.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
+router.use(authenticate);
 
 router.get('/', ctrlWrapper(getContactsCtrl));
 router.get('/:id', isValidId, ctrlWrapper(getContactByIdCtrl));

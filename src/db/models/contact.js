@@ -1,6 +1,6 @@
-import { mongoose } from 'mongoose';
+import { mongoose, Schema } from 'mongoose';
 import { CONTACT_TYPE } from '../../constants/index.js';
-const contactSchema = new mongoose.Schema(
+const contactSchema = new Schema(
   {
     name: {
       type: String,
@@ -23,6 +23,7 @@ const contactSchema = new mongoose.Schema(
       required: [true, 'Set contact type'],
       default: CONTACT_TYPE.PERSONAL,
     },
+    userId: { type: Schema.Types.ObjectId, ref: 'users' },
   },
   { versionKey: false, timestamps: true },
 );
