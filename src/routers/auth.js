@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerUserCtrl, loginUserCtrl } from '../controllers/auth.js';
+import { registerUserCtrl, loginUserCtrl, refreshUserSessionCtrl } from '../controllers/auth.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { registerUserSchema, loginUserSchema } from '../validation/auth.js';
@@ -17,5 +17,7 @@ router.post(
     validateBody(loginUserSchema),
     ctrlWrapper(loginUserCtrl),
   );
+
+  router.post('/refresh', ctrlWrapper(refreshUserSessionCtrl));
 
 export default router;
