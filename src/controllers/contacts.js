@@ -14,12 +14,13 @@ export const getContactsCtrl = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams(req.query);
   const filter = parseFilterParams(req.query);
+  const userId = req.user._id;
   const contacts = await getAllContacts({
     page,
     perPage,
     sortBy,
     sortOrder,
-    filter,
+    filter: { ...filter, userId },
   });
   res.send({
     status: 200,
