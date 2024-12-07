@@ -2,6 +2,7 @@ import {
   registerUser,
   loginUser,
   refreshUserSession,
+  logoutUser,
 } from '../services/auth.js';
 import { ONE_MONTH } from '../constants/index.js';
 
@@ -55,4 +56,15 @@ export const refreshUserSessionCtrl = async (req, res) => {
       accessToken: session.accessToken,
     },
   });
+};
+
+export const logoutUserCtrl = async (req, res) => {
+  if (req.cookies.sessionId) {
+    await logoutUser(req.cookies.sessionId);
+  }
+
+  res.clearCookie('sessionId');
+  res.clearCookie('refreshToken');
+
+  res.status(204).send();
 };
