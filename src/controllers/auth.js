@@ -46,8 +46,6 @@ export const refreshUserSessionCtrl = async (req, res) => {
     refreshToken: req.cookies.refreshToken,
   });
 
-  console.log('SESSION CTRL: ', session);
-
   setupSession(res, session);
 
   res.json({
