@@ -33,7 +33,7 @@ export const getContactByIdCtrl = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
 
-  const contact = await getContactById({ id, userId });
+  const contact = await getContactById(id, userId );
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
   }
@@ -61,7 +61,7 @@ export const deleteContactCtrl = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
 
-  const contact = await deleteContact({ id, userId });
+  const contact = await deleteContact( id, userId );
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
   }
