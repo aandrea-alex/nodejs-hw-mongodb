@@ -140,10 +140,8 @@ export const resetPassword = async (payload) => {
   try {
     entries = jwt.verify(payload.token, env('JWT_SECRET'));
   } catch (err) {
-    if (err.name === 'TokenExpiredError') {
-      throw createHttpError(401, 'Token has expired');
-    } else if (err.name === 'JsonWebTokenError') {
-      throw createHttpError(401, 'Invalid token');
+    if (err.name === 'TokenExpiredError' || err.name === 'JsonWebTokenError') {
+      throw createHttpError(401, 'Token is expired or invalid.');    
     } else {
       throw createHttpError(500, 'An unexpected error occurred');
     }
@@ -164,4 +162,6 @@ export const resetPassword = async (payload) => {
     { _id: user._id },
     { password: encryptedPassword },
   );
+  
+  await SessionsCollection.deleteMany({ userId: user._id });
 };
