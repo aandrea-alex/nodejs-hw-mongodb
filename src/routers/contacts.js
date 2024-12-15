@@ -1,7 +1,10 @@
 import { Router } from 'express';
 import { validateBody } from '../middlewares/validateBody.js';
 import { isValidId } from '../middlewares/isValidId.js';
-import { createContactSchema, updateContactSchema } from '../validation/contacts.js';
+import {
+  createContactSchema,
+  updateContactSchema,
+} from '../validation/contacts.js';
 import {
   getContactsCtrl,
   getContactByIdCtrl,
@@ -18,8 +21,19 @@ router.use(authenticate);
 
 router.get('/', ctrlWrapper(getContactsCtrl));
 router.get('/:id', isValidId, ctrlWrapper(getContactByIdCtrl));
-router.post('/', validateBody(createContactSchema), ctrlWrapper(createContactCtrl));
-router.patch('/:id', isValidId,  upload.single('photo'),validateBody(updateContactSchema), ctrlWrapper(patchContactCtrl));
+router.post(
+  '/',
+  upload.single('photo'),
+  validateBody(createContactSchema),
+  ctrlWrapper(createContactCtrl),
+);
+router.patch(
+  '/:id',
+  isValidId,
+  upload.single('photo'),
+  validateBody(updateContactSchema),
+  ctrlWrapper(patchContactCtrl),
+);
 router.delete('/:id', isValidId, ctrlWrapper(deleteContactCtrl));
 
 export default router;
