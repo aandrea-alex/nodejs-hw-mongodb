@@ -56,7 +56,6 @@ export const loginUser = async (payload) => {
 };
 
 export const refreshUserSession = async ({ sessionId, refreshToken }) => {
-  console.log('SESSION SERVICES: ', { sessionId, refreshToken });
   const session = await SessionsCollection.findOne({
     _id: sessionId,
     refreshToken,

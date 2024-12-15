@@ -25,7 +25,9 @@ export const createContactSchema = Joi.object({
     .messages({
       'string.base': 'Contact type should be a string',
       'any.required': 'Contact type is required',
-      'any.only': `Contact type must be one of ${Object.values(CONTACT_TYPE).join(', ')}`,
+      'any.only': `Contact type must be one of ${Object.values(
+        CONTACT_TYPE,
+      ).join(', ')}`,
     }),
 });
 
@@ -46,10 +48,14 @@ export const updateContactSchema = Joi.object({
   isFavourite: Joi.boolean().messages({
     'boolean.base': 'Favourite status must be a boolean value',
   }),
-  contactType: Joi.string().valid(...Object.values(CONTACT_TYPE)).messages({
-    'string.base': 'Contact type should be a string',
-    'any.only': `Contact type must be one of ${Object.values(CONTACT_TYPE).join(', ')}`,
-  }),
+  contactType: Joi.string()
+    .valid(...Object.values(CONTACT_TYPE))
+    .messages({
+      'string.base': 'Contact type should be a string',
+      'any.only': `Contact type must be one of ${Object.values(
+        CONTACT_TYPE,
+      ).join(', ')}`,
+    }),
 })
   .min(1)
   .messages({
