@@ -9,6 +9,7 @@ import {
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 import { parseFilterParams } from '../utils/parseFilterParams.js';
+import { saveFileToUploadDir } from '../utils/saveFileToUploadDir.js';
 
 export const getContactsCtrl = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
@@ -33,7 +34,7 @@ export const getContactByIdCtrl = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
 
-  const contact = await getContactById(id, userId );
+  const contact = await getContactById(id, userId);
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
   }
@@ -60,8 +61,7 @@ export const createContactCtrl = async (req, res) => {
 export const deleteContactCtrl = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
-
-  const contact = await deleteContact( id, userId );
+  const contact = await deleteContact(id, userId);
   if (!contact) {
     throw createHttpError(404, 'Contact not found');
   }
@@ -72,8 +72,16 @@ export const deleteContactCtrl = async (req, res) => {
 export const patchContactCtrl = async (req, res) => {
   const { id } = req.params;
   const userId = req.user._id;
+  const photo = req.file;
   const payload = { ...req.body, userId };
-  const result = await updateContact(id, payload);
+
+  let photoUrl;
+
+  if (photo) {
+    photoUrl = await saveFileToUploadDir(photo);
+  }
+
+  const result = await updateContact(id, { ...payload, photo: photoUrl });
 
   if (!result) {
     throw createHttpError(404, 'Contact not found');
