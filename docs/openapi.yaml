@@ -8,6 +8,7 @@ info:
   description: This is a documentation of PhoneBook app
 servers:
   - url: http://127.0.0.1:3000
+  - url: https://nodejs-hw-mongodb-3g8y.onrender.com
 tags:
   - name: Contacts
     description: Operation with contacts.
