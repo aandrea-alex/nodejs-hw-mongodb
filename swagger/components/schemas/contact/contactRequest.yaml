@@ -2,7 +2,6 @@ type: object
 required:
   - name
   - phoneNumber
-  - email
   - contactType
 properties:
   name:
@@ -32,5 +31,5 @@ properties:
     description: 'Link to a photo of the contact'
     type: string
     format: uri
-    default: null
+    default: ''
     example: 'https://res.cloudinary.com/dha4xvgfi/image/upload/v1724438545/g3n05nth0sgqzyakh0dm.jpg'

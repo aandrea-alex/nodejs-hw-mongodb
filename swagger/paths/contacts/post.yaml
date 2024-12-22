@@ -9,45 +9,10 @@ requestBody:
   content:
     multipart/form-data:
       schema:
-        type: object
-        required:
-          - name
-          -
-          - gender
-          - avgMark
-          - parentId
-        properties:
-          name:
-            description: "Student's name"
-            type: string
-            example: 'John Doe'
-          age:
-            description: "Student's age"
-            type: number
-            example: 12
-          gender:
-            description: "Student's age"
-            type: string
-            enum: ['male', 'female', 'other']
-          avgMark:
-            description: "Student's average mark. Should be between 1 and 12"
-            type: number
-            example: 9.7
-          onDuty:
-            description: 'Whether is student on duty'
-            type: boolean
-            example: false
-          parentId:
-            description: "Student's parent id"
-            type: string
-            example: 65e4decdd286b30065d54af9
-          photo:
-            description: "Student's photo"
-            type: string
-            format: binary
+        $ref: '../../components/schemas/contact/contactRequest.yaml'
 responses:
   '201':
-    description: Creates a student
+    description: Creates a contact
     content:
       application/json:
         schema:
@@ -62,9 +27,13 @@ responses:
               example: 201
             message:
               type: string
-              example: Successfully created a student!
+              example: Successfully created a contact!
             data:
               type: object
-              $ref: '../../components/schemas/student.yaml'
+              $ref: '../../components/schemas/contact/contactResponse.yaml'
+  '400':
+    $ref: '../../components/responses/400.yaml'
   '401':
     $ref: '../../components/responses/401.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

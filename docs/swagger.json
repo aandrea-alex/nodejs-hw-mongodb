@@ -178,6 +178,62 @@
             "$ref": "#/components/responses/500"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create contact",
+        "operationId": "createContact",
+        "description": "Create a contact with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/contactRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates a contact",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully created a contact!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/contactResponse"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          }
+        }
       }
     },
     "/contacts/{id}": {
@@ -331,6 +387,55 @@
             "type": "string",
             "format": "date-time",
             "example": "2024-12-15T20:45:49.015Z"
+          }
+        }
+      },
+      "contactRequest": {
+        "type": "object",
+        "required": [
+          "name",
+          "phoneNumber",
+          "contactType"
+        ],
+        "properties": {
+          "name": {
+            "description": "Name of the contact",
+            "type": "string",
+            "example": "John Doe"
+          },
+          "phoneNumber": {
+            "description": "Phone number of the contact",
+            "type": "string",
+            "example": "(+380)995437822"
+          },
+          "email": {
+            "description": "Email address of the contact",
+            "type": "string",
+            "example": "johndoe@gmail.com"
+          },
+          "isFavourite": {
+            "description": "Whether the contact is marked as a favourite",
+            "type": "boolean",
+            "default": false,
+            "example": false
+          },
+          "contactType": {
+            "description": "Type of the contact",
+            "type": "string",
+            "enum": [
+              "work",
+              "home",
+              "personal"
+            ],
+            "example": "work",
+            "default": "personal"
+          },
+          "photo": {
+            "description": "Link to a photo of the contact",
+            "type": "string",
+            "format": "uri",
+            "default": "",
+            "example": "https://res.cloudinary.com/dha4xvgfi/image/upload/v1724438545/g3n05nth0sgqzyakh0dm.jpg"
           }
         }
       }
