@@ -13,9 +13,12 @@ tags:
   - name: Contacts
     description: Operation with contacts.
 paths:
+  /contacts:
+    get:
+      $ref: ../swagger/paths/contacts/get.yaml
   /contacts/{id}:
-    get: 
-      $ref: ../swagger/paths/contacts/{id}/get.yaml  
+    get:
+      $ref: ../swagger/paths/contacts/{id}/get.yaml
 components:
   securitySchemes:
     bearerAuth:
