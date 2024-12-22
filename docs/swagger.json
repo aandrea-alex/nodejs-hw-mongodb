@@ -230,8 +230,14 @@
               }
             }
           },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
           }
         }
       }
@@ -469,7 +475,7 @@
                   "properties": {
                     "message": {
                       "type": "string",
-                      "example": "Bad Request. Invalid ID = 675f3ffd61801704d532230q"
+                      "example": "Bad Request. Invalid parameter."
                     }
                   }
                 }
