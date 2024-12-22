@@ -122,15 +122,21 @@
                     "data": {
                       "type": "object",
                       "required": [
+                        "data",
                         "page",
                         "perPage",
                         "totalItems",
                         "totalPages",
                         "hasNextPage",
-                        "hasPreviousPage",
-                        "data"
+                        "hasPreviousPage"
                       ],
                       "properties": {
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/contactResponse"
+                          }
+                        },
                         "page": {
                           "type": "number",
                           "example": 2
@@ -154,12 +160,6 @@
                         "hasPreviousPage": {
                           "type": "boolean",
                           "example": true
-                        },
-                        "data": {
-                          "type": "array",
-                          "items": {
-                            "$ref": "#/components/schemas/contactResponse"
-                          }
                         }
                       }
                     }
@@ -232,6 +232,9 @@
                 }
               }
             }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -333,6 +336,43 @@
       }
     },
     "responses": {
+      "400": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 400
+                },
+                "message": {
+                  "type": "string",
+                  "example": "BadRequestError"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Bad Request. Invalid ID = 675f3ffd61801704d532230q"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "401": {
         "description": "Unauthorized Error",
         "content": {
